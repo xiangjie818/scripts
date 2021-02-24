@@ -1,0 +1,10 @@
+#!/usr/bin/expect
+set ipaddress [ lindex $argv 0 ]
+set passwd [ lindex $argv 1 ]
+set timeout 30
+spawn ssh-copy-id -i $ipaddress
+expect {
+"yes/no" { send "yes\r";exp_continue }
+"password:" { send "$passwd\r" }
+}
+interact
